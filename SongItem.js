@@ -1,21 +1,32 @@
-import { StyleSheet, Text, Image, View } from "react-native";
+import { StyleSheet, Text, Image, View, Pressable } from "react-native";
 import React, { useState } from "react";
 import Colors from "./Themes/colors";
+import { AntDesign } from '@expo/vector-icons';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function Song({index, image, title, artist, album, duration}) {
+const Stack = createStackNavigator();
+
+// item.external_urls.spotify
+// item.preview_url
+
+
+export default function Song({ image, title, artist, album, duration, navigation }) {
     return (
-        <View style={styles.item}>
-            <Text style={styles.index}>{index}</Text>
-            <Image style={styles.albumArt} source={image}/>
-            <View style={styles.content}>
+        <View>
+            <Pressable onPress={() => navigation.navigate('DetailedSong')} style={styles.button}>
+                <Pressable onPress={() => navigation.navigate('SongPreview')} style={styles.index}>
+                    <AntDesign name="play" size={24} color={Colors.spotify} />
+                </Pressable>
 
-            </View>
-            <View style={styles.titleArtist}>
-                <Text numberOfLines={1} style={styles.title}>{title}</Text>
-                <Text numberOfLines={1} style={styles.artist}>{artist}</Text>
-            </View>
-            <Text style={styles.album}>{album}</Text>
-            <Text style={styles.duration}>{duration}</Text>
+                <Image style={styles.albumArt} source={image} />
+                <View style={styles.titleArtist}>
+                    <Text numberOfLines={1} style={styles.title}>{title}</Text>
+                    <Text numberOfLines={1} style={styles.artist}>{artist}</Text>
+                </View>
+                <Text style={styles.album}>{album}</Text>
+                <Text style={styles.duration}>{duration}</Text>
+            </Pressable>
         </View>
     );
 }
@@ -23,21 +34,18 @@ export default function Song({index, image, title, artist, album, duration}) {
 
 const styles = StyleSheet.create({
     item: {
-        flex: 1, 
+        flex: 1,
         flexDirection: "row",
-        margin: 10, 
-        marginTop: 5,
-    }, 
+    },
 
     index: {
-        color: Colors.gray,
-        alignSelf: "center",
-        marginLeft: 5,
-        width: "5%"
+        flexDirection: "row",
+        marginRight: 8,
+        width: "7%"
     },
 
     albumArt: {
-        marginRight: 10, 
+        marginRight: 10,
         width: "15%"
     },
 
@@ -48,7 +56,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        color: "white", 
+        color: "white",
         fontWeight: "bold"
     },
 
@@ -66,8 +74,13 @@ const styles = StyleSheet.create({
 
     duration: {
         color: "white",
-        alignSelf: "center", 
+        alignSelf: "center",
         marginRight: 5,
         width: "10%"
+    },
+
+    button: {
+        flex: 1,
+        flexDirection: "row",
     }
 });
