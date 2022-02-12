@@ -1,12 +1,6 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, SafeAreaView, Pressable, Image, View, FlatList } from "react-native";
-import { useState, useEffect } from "react";
-import { ResponseType, useAuthRequest } from "expo-auth-session";
-import { myTopTracks, albumTracks } from "./utils/apiOptions";
-import { REDIRECT_URI, SCOPES, CLIENT_ID, ALBUM_ID } from "./utils/constants";
-import Colors from "./Themes/colors"
-import Song from "./SongItem";
-import millisToMinutesAndSeconds from "./utils/millisToMinuteSeconds";
+import Colors from "./Themes/colors";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -21,10 +15,10 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="MainScreen" component={MainScreen}/>
-        <Stack.Screen name="DetailedSong" component={DetailedSong}/>
-        {/* <Stack.Screen name="SongPreview" component={SongPreview}/> */}
+      <Stack.Navigator>
+        <Stack.Screen name="Main Screen" component={MainScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Detailed Song" component={DetailedSong} options={{headerStyle: {backgroundColor: Colors.background}, headerTintColor: '#fff'}}/>
+        <Stack.Screen name="Song Preview" component={SongPreview} options={{headerStyle: {backgroundColor: Colors.background}, headerTintColor: '#fff'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

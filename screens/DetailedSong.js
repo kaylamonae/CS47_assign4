@@ -1,18 +1,10 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Pressable } from 'react-native';
+import { WebView } from "react-native-webview";
 
-export default function DetailedSong({ navigation }) {
+export default function DetailedSong({ navigation, route}) {
+    const params = route.params;
+    console.log(params.url);
     return (
-        <View style={styles.song}>
-            <Pressable onPress={() => navigation.navigate('MainScreen')}/>
-        </View>
+        <WebView source={{uri: params.url}}/>
     );
 }
-
-const styles = StyleSheet.create({
-    song: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-})

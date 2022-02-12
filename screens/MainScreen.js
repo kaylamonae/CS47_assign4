@@ -63,10 +63,11 @@ export default function MainScreen({navigation}) {
       artist={item.artists[0].name}
       album={item.album.name}
       duration={millisToMinutesAndSeconds(item.duration_ms)}
+      navigation={navigation}
+      preview={item.preview_url}
+      detailed={item.external_urls.spotify}
     />
   );
-  // item.external_urls.spotify
-  // item.preview_url
 
   let contentDisplayed = null;
 
